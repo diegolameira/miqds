@@ -1,0 +1,10 @@
+@tailwind base;
+
+@layer base {
+  html {
+    @apply font-sans antialiased;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;

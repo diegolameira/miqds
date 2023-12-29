@@ -1,0 +1,29 @@
+import { Meta, Typeset } from '@storybook/blocks';
+import { typography } from '@/tokens/typography';
+import { TypographyTable } from '../../.storybook/utils';
+
+import { ThemeProvider } from '@/components/theme';
+
+import { getTypographySizes } from './utils.ts';
+
+<Meta title="Design System/Tokens/Typography" />
+
+export const SampleText =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+# Typography
+
+## Font: Graphik
+
+**Weight:** 400(normal/regular), 500(medium), **600(semibold)**
+
+<div style={{ letterSpacing: '-0.02em' }}>
+  <Typeset
+    sampleText={SampleText}
+    fontSizes={getTypographySizes(typography).map((size) => Number(size))}
+    fontWeight={600}
+    fontFamily="'graphik_regularregular', Helvetica, sans-serif"
+  />
+</div>
+
+<TypographyTable of={typography} />

@@ -1,0 +1,40 @@
+import { ColorPalette, ColorItem, Meta } from '@storybook/blocks';
+import { TabsState } from '@storybook/components';
+
+import { primitivesColors, semanticColors } from '@/tokens/colors';
+import { getPrimitivesColors, getSemanticColors } from '@/docs/utils';
+
+<Meta title="Design System/Tokens/Colors" />
+
+# Colors
+
+## Primitive tokens
+
+This color palette serves as the bedrock of our Design System, designed to bring unity and visual fluency across all UI/UX aspects of our product. These colors are carefully curated to meet brand requirements and to create a user-friendly interface.
+
+<ColorPalette>
+  {getPrimitivesColors(primitivesColors).map(({ name, colors }) => (
+    <ColorItem key={name} title={name} colors={colors} />
+  ))}
+</ColorPalette>
+
+## Semantic tokens
+
+Color tokens are a set of named variables that correspond to specific color values in our palette. By utilizing these tokens instead of hard-coded color values, we ensure a scalable, maintainable, and consistent color scheme across our UI/UX designs.
+
+<TabsState>
+  {Object.entries(semanticColors).map(([groupName, obj]) => (
+    <div key={groupName} id={groupName} title={groupName}>
+      <ColorPalette>
+        {getSemanticColors(obj).map(({ name, description, colors }) => (
+          <ColorItem
+            key={`color.${groupName.toLowerCase()}.${name}`}
+            title={`color.${groupName.toLowerCase()}.${name}`}
+            subtitle={description}
+            colors={colors}
+          />
+        ))}
+      </ColorPalette>
+    </div>
+  ))}
+</TabsState>

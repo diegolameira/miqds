@@ -1,0 +1,106 @@
+import { Meta, Description, Source } from '@storybook/blocks';
+import { TabsState } from '@storybook/components';
+import { Grid } from '../../../.storybook/utils';
+import * as ButtonStories from './stories/button.stories';
+import * as PrimaryStates from './stories/button.states.primary.stories';
+import * as SecondaryStates from './stories/button.states.secondary.stories';
+import * as TertiaryStates from './stories/button.states.tertiary.stories';
+import * as DestructiveStates from './stories/button.states.destructive.stories';
+import * as OutlineStates from './stories/button.states.outline.stories';
+import * as ClassificationButtonStories from './stories/button.classification.stories';
+import * as IconButtonStories from './stories/button.icon.stories';
+import pkg from '../../../package.json';
+
+<Meta title="Components/Buttons/Introduction" />
+
+# Buttons
+
+> The button component is used to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+
+### Default
+
+<TabsState>
+  <div id="preview" title="Preview">
+    <Grid of={ButtonStories} />
+  </div>
+  <div id="code" title="Code Sample">
+    <Source
+      language="jsx"
+      code={`
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="tertiary">Tertiary</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+      `}
+    />
+  </div>
+</TabsState>
+
+Preview states of each component variant
+
+<TabsState>
+  {[
+    ['Primary', PrimaryStates],
+    ['Secondary', SecondaryStates],
+    ['Tertiary', TertiaryStates],
+    ['Destructive', DestructiveStates],
+    ['Outline', OutlineStates],
+  ].map(([groupName, content]) => (
+    <div key={groupName} id={groupName} title={groupName}>
+      <Grid of={content} />
+    </div>
+  ))}
+</TabsState>
+
+### Classification
+
+<TabsState>
+  <div id="preview" title="Preview">
+    <Grid of={ClassificationButtonStories} />
+  </div>
+  <div id="code" title="Code Sample">
+    <Source
+      language="jsx"
+      code={`
+<Button variant="business" />
+<Button variant="personal" />
+      `}
+    />
+  </div>
+</TabsState>
+
+### Icon
+
+<TabsState>
+  <div id="preview" title="Preview">
+    <Grid of={IconButtonStories} />
+  </div>
+  <div id="code" title="Code Sample">
+    <Source
+        language="jsx"
+        code={`
+<Button variant="primary" iconOnly><AddICON /></Button>
+<Button variant="secondary" iconOnly><AddICON /></Button>
+<Button variant="tertiary" iconOnly><AddICON /></Button>
+<Button variant="destructive" iconOnly><TrashICON /></Button>
+<Button variant="business" iconOnly />
+<Button variant="personal" iconOnly />
+<Button variant="outline" iconOnly><AddICON /></Button>
+`}/>
+
+  </div>
+</TabsState>
+
+# Usage
+
+<Source
+  language="jsx"
+  code={`
+import { Button } from "${pkg.name}";
+
+export const Page = () => {
+  const getDrives = () => {};
+  return <Button onClick={getDrives} variant="primary">Click me</Button>;
+};
+`}/>

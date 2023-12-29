@@ -1,0 +1,113 @@
+<link
+  href="/favicon/apple-touch-icon.png"
+  rel="apple-touch-icon"
+  sizes="180x180"
+/>
+<link
+  href="/favicon/favicon-32x32.png"
+  rel="icon"
+  sizes="32x32"
+  type="image/png"
+/>
+<link
+  href="/favicon/favicon-16x16.png"
+  rel="icon"
+  sizes="16x16"
+  type="image/png"
+/>
+<link href="/favicon/site.webmanifest" rel="manifest" />
+<link color="#0060ce" href="/favicon/safari-pinned-tab.svg" rel="mask-icon" />
+<link href="/original_fonts/index.css" rel="stylesheet" />
+<link href="/webfontkit/index.css" rel="stylesheet" />
+<link href="/favicon/favicon.ico" rel="shortcut icon" />
+<meta content="/favicon/browserconfig.xml" name="msapplication-config" />
+<meta content="#0060ce" name="msapplication-TileColor" />
+<meta content="#fff" name="theme-color" />
+<script>
+  var global = global || window;
+</script>
+<style>
+  #root {
+    position: static;
+  }
+
+  .docblock-typeset {
+    background-color: hsla(var(--background)) !important;
+    color: hsla(var(--foreground)) !important;
+  }
+
+  /* storybook present interaction */
+  .clickEffect {
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    /*background: red;*/
+    position: fixed;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: #ffc400d6;
+    border-radius: 50%;
+    animation: clickEffect 1s ease-out;
+    z-index: 99999;
+  }
+
+  @keyframes clickEffect {
+    0% {
+      opacity: 1;
+      width: 0.5em;
+      height: 0.5em;
+      margin: -0.25em;
+      border-width: 0.5em;
+    }
+
+    100% {
+      opacity: 0.2;
+      width: 15em;
+      height: 15em;
+      margin: -7.5em;
+      border-width: 0.03em;
+    }
+  }
+
+  #demoCursor {
+    z-index: 999;
+    transition-duration: 1000ms;
+    transition-timing-function: cubic-bezier(0.2, 1, 0.2, 1);
+    transition-property: top, left;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin: -20px 0 0 -20px;
+    background: rgba(0, 0, 0, 0);
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+  }
+
+  #demoCursor.moving {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+
+  #demoCursor.hide {
+    animation: cursorHide 1000ms linear;
+  }
+
+  /* Custom styles for Storybook's Source component */
+  code {
+    background-color: #272822; /* Example: Monokai theme background */
+    color: #f8f8f2; /* Light text for contrast */
+    /* Additional styles... */
+  }
+
+  @keyframes cursorHide {
+    0% {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    100% {
+      background: rgba(0, 0, 0, 0);
+    }
+  }
+</style>
