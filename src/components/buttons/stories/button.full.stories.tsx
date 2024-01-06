@@ -9,6 +9,7 @@ import { Button, ButtonVariantsKeys } from '../button';
 const meta = {
   component: Button,
   title: 'Components/Buttons/Full',
+  tags: ['autodocs'],
   args: {
     children: 'Full Button',
     full: true,
@@ -41,7 +42,7 @@ const meta = {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/3Q1HTCalD0lJnNvcMoEw1x/Mealdrop?node-id=1005%3A2974&t=8pzYUq8GyzmMGjJ2-4',
+      url: 'https://www.figma.com/file/gDafe4G9bGWh24cn1MEetU/MileIQ-Design-System-(NEW)?type=design&node-id=841-2409&mode=design&t=iIlPp1yeaxsVAusH-4',
     },
   },
 } satisfies Meta<typeof Button>;

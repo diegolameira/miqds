@@ -41,6 +41,7 @@ const preview: Preview = {
       ],
     },
     controls: {
+      // expanded: true,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,

@@ -5,6 +5,7 @@ import { Button, ButtonVariantsKeys } from '../button';
 const meta = {
   component: Button,
   title: 'Components/Buttons/Classification',
+  tags: ['autodocs'],
   args: {
     children: 'Button',
   },
@@ -24,6 +25,12 @@ const meta = {
     disabled: { control: 'boolean' },
     iconOnly: { control: 'boolean' },
     loading: { control: 'boolean' },
+  },
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/file/gDafe4G9bGWh24cn1MEetU/MileIQ-Design-System-(NEW)?type=design&node-id=812-2931&mode=design&t=iIlPp1yeaxsVAusH-4',
+    },
   },
 } satisfies Meta<typeof Button>;
 

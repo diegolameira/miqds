@@ -5,6 +5,8 @@ import { ButtonVariantsKeys, FilterButton } from '..';
 const meta = {
   component: FilterButton,
   title: 'Components/Buttons/Filter',
+  tags: ['autodocs'],
+
   args: {
     children: 'Filter',
   },
@@ -28,10 +30,10 @@ const meta = {
   parameters: {
     design: {
       type: 'figma',
-      url: 'https://www.figma.com/file/3Q1HTCalD0lJnNvcMoEw1x/Mealdrop?node-id=1005%3A2974&t=8pzYUq8GyzmMGjJ2-4',
+      url: 'https://www.figma.com/file/gDafe4G9bGWh24cn1MEetU/MileIQ-Design-System-(NEW)?type=design&node-id=813-4975&mode=design&t=iIlPp1yeaxsVAusH-4',
     },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof FilterButton>;
 
 export default meta;
 

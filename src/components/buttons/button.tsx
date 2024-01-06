@@ -119,6 +119,18 @@ const buttonVariants = cva(
           'bg-destructive-pressed disabled:bg-destructive-pressed disabled:!text-destructive-foreground',
       },
       {
+        variant: 'business',
+        loading: true,
+        className:
+          'bg-business-pressed disabled:bg-business-pressed disabled:!text-business-foreground',
+      },
+      {
+        variant: 'personal',
+        loading: true,
+        className:
+          'bg-personal-pressed disabled:bg-personal-pressed disabled:!text-personal-foreground',
+      },
+      {
         variant: 'destructive',
         iconOnly: true,
         className:
@@ -218,16 +230,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               : 'justify-end',
           leftIcon &&
             !iconOnly &&
-            (size == 'sm'
+            (size === 'sm'
               ? '!pl-space12'
-              : size == 'md'
+              : size === 'md'
                 ? '!pl-space16'
                 : '!pl-space12 md:!pl-space16'),
           rightIcon &&
             !iconOnly &&
-            (size == 'sm'
+            (size === 'sm'
               ? '!pr-space12'
-              : size == 'md'
+              : size === 'md'
                 ? '!pr-space16'
                 : '!pr-space12 md:!pr-space16'),
         ])}
