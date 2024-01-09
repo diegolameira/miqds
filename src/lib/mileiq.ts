@@ -1,3 +1,4 @@
+import autoPrefix from 'autoprefixer';
 import type { Config } from 'tailwindcss';
 import animatePlugin from 'tailwindcss-animate';
 import plugin from 'tailwindcss/plugin';
@@ -26,7 +27,7 @@ export default {
   darkMode: 'class',
   safelist: ['dark'],
   content: [],
-  plugins: [animatePlugin, mileiqPlugin()],
+  plugins: [autoPrefix, animatePlugin, mileiqPlugin()],
 } satisfies Config;
 
 function mileiqPlugin() {
@@ -35,6 +36,15 @@ function mileiqPlugin() {
   return plugin(
     function ({ addBase }) {
       addBase({
+        '[type="search"]::-webkit-search-decoration': { display: 'none' },
+        '[type="search"]::-webkit-search-cancel-button': { display: 'none' },
+        '[type="search"]::-webkit-search-results-button': { display: 'none' },
+        '[type="search"]::-webkit-search-results-decoration': {
+          display: 'none',
+        },
+        '[type=password]::-ms-reveal': { display: 'none' },
+        '[type=password]::-ms-clear': { display: 'none' },
+
         ':root': {
           '--font-sans': fontFamilySans,
           '--font-body': fontFamilyBody,

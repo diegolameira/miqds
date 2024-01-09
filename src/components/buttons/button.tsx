@@ -220,7 +220,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             loading,
             disabled,
             full,
-            className,
+            // className,
             isActive,
           }),
           align === 'center'
@@ -231,17 +231,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           leftIcon &&
             !iconOnly &&
             (size === 'sm'
-              ? '!pl-space12'
+              ? 'pl-space12'
               : size === 'md'
-                ? '!pl-space16'
-                : '!pl-space12 md:!pl-space16'),
+                ? 'pl-space16'
+                : 'pl-space12 md:pl-space16'),
           rightIcon &&
             !iconOnly &&
             (size === 'sm'
-              ? '!pr-space12'
+              ? 'pr-space12'
               : size === 'md'
-                ? '!pr-space16'
-                : '!pr-space12 md:!pr-space16'),
+                ? 'pr-space16'
+                : 'pr-space12 md:pr-space16'),
+          className,
         ])}
         disabled={disabled || loading}
         ref={ref}
