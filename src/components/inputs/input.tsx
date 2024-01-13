@@ -164,7 +164,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       case InputType.CreditCard:
         icon = <CreditCardICON />;
         props.autoComplete = 'cc-number';
-        props.maxLength = '19';
+        props.maxLength = 19;
         props.placeholder = '1234 1234 1234 1234';
         computedType = InputType.Tel;
         props.inputMode = 'numeric';
@@ -188,6 +188,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <div
             className={cn([
               'absolute inline-flex w-[20px] h-[20px] left-space12 justify-center items-center text-[hsla(var(--color-icon-default))]',
+              type !== InputType.Tel && 'pointer-events-none',
               type === InputType.Tel &&
                 'w-[auto] ml-[calc(var(--spacing-space12)/-1)]',
             ])}
@@ -221,7 +222,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
         </div>
         {Boolean(action) && (
-          <div className="absolute inline-flex h-[20px] right-0 justify-center items-center text-[hsla(var(--color-icon-default))]">
+          <div
+            className={cn([
+              'absolute inline-flex h-[20px] right-0 justify-center items-center text-[hsla(var(--color-icon-default))]',
+              type === InputType.Distance && 'pointer-events-none',
+            ])}
+          >
             {action}
           </div>
         )}

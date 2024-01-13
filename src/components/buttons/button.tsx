@@ -176,7 +176,7 @@ export interface ButtonProps
   rightIcon?: React.ReactNode;
   iconOnly?: boolean;
   align?: 'center' | 'left' | 'right';
-  size?: 'default' | 'sm' | 'icon';
+  size?: 'default' | 'sm' | 'md' | 'icon';
   asChild?: boolean;
 }
 

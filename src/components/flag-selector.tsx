@@ -32,7 +32,7 @@ const FlagSelectorOptions = [
   },
 ];
 
-function FlagSelector({ className, onChange = () => {}, ...props }) {
+function FlagSelector({ className, onChange = () => {} }) {
   const [selected, setSelected] = React.useState(FlagSelector.options[0]);
 
   return (

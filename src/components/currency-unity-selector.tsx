@@ -31,7 +31,6 @@ function CurrencyUnitSelector({
   className,
   align = 'end',
   onChange = () => {},
-  ...props
 }) {
   const [selected, setSelected] = React.useState(
     CurrencyUnitSelector.options[0]
