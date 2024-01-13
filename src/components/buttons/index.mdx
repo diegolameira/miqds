@@ -6,9 +6,11 @@ import * as PrimaryStates from './stories/button.states.primary.stories';
 import * as SecondaryStates from './stories/button.states.secondary.stories';
 import * as TertiaryStates from './stories/button.states.tertiary.stories';
 import * as DestructiveStates from './stories/button.states.destructive.stories';
-import * as OutlineStates from './stories/button.states.outline.stories';
 import * as ClassificationButtonStories from './stories/button.classification.stories';
-import * as IconButtonStories from './stories/button.icon.stories';
+import * as FilterButtonStories from './stories/button.filter.stories';
+import * as NavButtonStories from './stories/button.nav.stories';
+import * as IconOnlyButtonStories from './stories/button.iconOnly.stories';
+import * as FullButtonStories from './stories/button.full.stories';
 import pkg from '../../../package.json';
 
 <Meta title="Components/Buttons/Introduction" />
@@ -31,7 +33,25 @@ import pkg from '../../../package.json';
 <Button variant="secondary">Secondary</Button>
 <Button variant="tertiary">Tertiary</Button>
 <Button variant="destructive">Destructive</Button>
-<Button variant="outline">Outline</Button>
+      `}
+    />
+  </div>
+</TabsState>
+
+### Full size
+
+<TabsState>
+  <div id="preview" title="Preview">
+    <Grid of={FullButtonStories} />
+  </div>
+  <div id="code" title="Code Sample">
+    <Source
+      language="jsx"
+      code={`
+<Button full variant="primary">Primary</Button>
+<Button full variant="secondary">Secondary</Button>
+<Button full variant="tertiary">Tertiary</Button>
+<Button full variant="destructive">Destructive</Button>
       `}
     />
   </div>
@@ -45,7 +65,6 @@ Preview states of each component variant
     ['Secondary', SecondaryStates],
     ['Tertiary', TertiaryStates],
     ['Destructive', DestructiveStates],
-    ['Outline', OutlineStates],
   ].map(([groupName, content]) => (
     <div key={groupName} id={groupName} title={groupName}>
       <Grid of={content} />
@@ -70,25 +89,61 @@ Preview states of each component variant
   </div>
 </TabsState>
 
-### Icon
+### Icon Only
 
 <TabsState>
   <div id="preview" title="Preview">
-    <Grid of={IconButtonStories} />
+    <Grid of={IconOnlyButtonStories} />
   </div>
   <div id="code" title="Code Sample">
     <Source
-        language="jsx"
-        code={`
+      language="jsx"
+      code={`
 <Button variant="primary" iconOnly><AddICON /></Button>
 <Button variant="secondary" iconOnly><AddICON /></Button>
 <Button variant="tertiary" iconOnly><AddICON /></Button>
 <Button variant="destructive" iconOnly><TrashICON /></Button>
 <Button variant="business" iconOnly />
 <Button variant="personal" iconOnly />
-<Button variant="outline" iconOnly><AddICON /></Button>
-`}/>
+`}
+    />
+  </div>
+</TabsState>
 
+### Filter
+
+<TabsState>
+  <div id="preview" title="Preview">
+    <Grid of={FilterButtonStories} />
+  </div>
+  <div id="code" title="Code Sample">
+    <Source
+      language="jsx"
+      code={`
+<Filter icon={<AddICON />} onClick={handleClick} onClear={handleClear}></Filter>
+`}
+    />
+  </div>
+</TabsState>
+
+### Nav
+
+<TabsState>
+  <div id="preview" title="Preview">
+    <Grid of={NavButtonStories} />
+  </div>
+  <div id="code" title="Code Sample">
+    <Source
+      language="jsx"
+      code={`
+<div className="flex flex-col gap-space2">
+  <NavButton isActive leftIcon={<CarICON />}>Drives</NavButton>
+  <NavButton leftIcon={<ReportsICON />}>Reports</NavButton>
+  <NavButton leftIcon={<SubscriptionICON />}>Subscription</NavButton>
+  <NavButton leftIcon={<SettingsICON />}>Settings</NavButton>
+</div>
+`}
+    />
   </div>
 </TabsState>
 

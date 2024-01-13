@@ -6,9 +6,7 @@ const meta = {
   component: Button,
   title: 'Components/Buttons/Classification',
   tags: ['autodocs'],
-  args: {
-    children: 'Button',
-  },
+  args: {},
   argTypes: {
     ...Object.entries(ButtonVariantsKeys).reduce(
       (acc, [key, val]) => ({
@@ -43,7 +41,7 @@ export const Business: SortedStory = {
   sort: 0,
   args: {
     variant: 'business',
-    children: 'Business',
+    align: 'center',
   },
 };
 
@@ -51,6 +49,23 @@ export const Personal: SortedStory = {
   sort: 1,
   args: {
     variant: 'personal',
-    children: false,
+  },
+};
+
+export const BusinessPurposeDropdown: SortedStory = {
+  sort: 2,
+  args: {
+    variant: 'business',
+    showArrow: true,
+    children: 'Business purpose',
+  },
+};
+
+export const PersonalPurposeDropdown: SortedStory = {
+  sort: 3,
+  args: {
+    variant: 'personal',
+    showArrow: true,
+    children: 'Personal purpose',
   },
 };

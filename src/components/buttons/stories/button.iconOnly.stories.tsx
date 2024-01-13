@@ -7,7 +7,7 @@ import { Button, ButtonVariantsKeys } from '../button';
 
 const meta = {
   component: Button,
-  title: 'Components/Buttons/Icon',
+  title: 'Components/Buttons/IconOnly',
   tags: ['autodocs'],
   args: {
     children: 'Add',
@@ -85,12 +85,5 @@ export const Personal: SortedStory = {
   sort: 5,
   args: {
     variant: 'personal',
-  },
-};
-
-export const Outline: SortedStory = {
-  sort: 6,
-  args: {
-    variant: 'outline',
   },
 };

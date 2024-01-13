@@ -5,6 +5,7 @@ import { Button, ButtonVariantsKeys } from '../button';
 const meta = {
   component: Button,
   title: 'Components/Buttons/Default',
+  tags: ['autodocs'],
   args: {
     children: 'Button',
   },
@@ -85,13 +86,5 @@ export const Destructive: SortedStory = {
   args: {
     variant: 'destructive',
     children: 'Destructive',
-  },
-};
-
-export const Outline: SortedStory = {
-  sort: 4,
-  args: {
-    variant: 'outline',
-    children: 'Outline',
   },
 };

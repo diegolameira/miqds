@@ -36,6 +36,10 @@ function mileiqPlugin() {
   return plugin(
     function ({ addBase }) {
       addBase({
+        'input::-webkit-outer-spin-button, input::-webkit-inner-spin-button': {
+          '-webkit-appearance': 'none',
+        },
+        'input[type=number]': { '-moz-appearance': 'textfield' },
         '[type="search"]::-webkit-search-decoration': { display: 'none' },
         '[type="search"]::-webkit-search-cancel-button': { display: 'none' },
         '[type="search"]::-webkit-search-results-button': { display: 'none' },

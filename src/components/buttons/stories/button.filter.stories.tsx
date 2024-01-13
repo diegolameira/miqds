@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import CalendarICON from '@/icons/calender.svg?react';
 import { ButtonVariantsKeys, FilterButton } from '..';
 
 const meta = {
@@ -45,46 +46,32 @@ export const FilterDefault: SortedStory = {
   args: {},
 };
 
-export const FilterWithBadge: SortedStory = {
-  sort: 0,
+export const FilterHideArrow: SortedStory = {
+  sort: 1,
   args: {
-    badge: 2,
-  },
-};
-
-export const FilterHiddenArrow: SortedStory = {
-  sort: 0,
-  args: {
-    badge: 2,
     hideArrow: true,
   },
 };
 
-export const FilterHiddenLabel: SortedStory = {
-  sort: 0,
+export const FilterWithIcon: SortedStory = {
+  sort: 1,
   args: {
-    badge: 2,
-    hideLabel: true,
+    icon: <CalendarICON />,
   },
 };
 
-export const FilterHiddenBadge: SortedStory = {
-  sort: 0,
+export const FilterHiddenArrowWithIcon: SortedStory = {
+  sort: 2,
   args: {
-    badge: 2,
-    hideBadge: true,
+    hideArrow: true,
+    icon: <CalendarICON />,
   },
 };
 
-export const FilterHiddenIcon: SortedStory = {
-  sort: 0,
+export const FilterWithIconAndBadge: SortedStory = {
+  sort: 3,
   args: {
     badge: 2,
-    hideIcon: true,
+    icon: <CalendarICON />,
   },
-};
-
-export const FilterCustomIcon: SortedStory = {
-  sort: 0,
-  args: {},
 };

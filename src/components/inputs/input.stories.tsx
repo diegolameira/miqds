@@ -5,12 +5,11 @@ import { CreditCardInput, Input, InputType } from '.';
 const meta = {
   component: Input,
   title: 'Components/Inputs',
-  args: {
-    placeholder: 'Placeholder',
-  },
+  tags: ['autodocs'],
+  args: {},
   argTypes: {
+    value: { defaultValue: '', control: 'text' },
     disabled: { control: 'boolean' },
-    loading: { control: 'boolean' },
   },
   parameters: {
     design: {
@@ -27,7 +26,9 @@ type SortedStory = Story & { sort: number };
 
 export const Default: SortedStory = {
   sort: 0,
-  args: {},
+  args: {
+    placeholder: 'Placeholder',
+  },
 };
 
 export const CreditCard: SortedStory = {
@@ -42,6 +43,7 @@ export const Search: SortedStory = {
   sort: 2,
   args: {
     type: InputType.Search,
+    placeholder: 'Placeholder',
   },
 };
 

@@ -1,39 +1,32 @@
 import { Button } from '@/components/buttons';
 
-import ArrowICON from '@/icons/arrow-down-b.svg?react';
-import CalendarICON from '@/icons/calender.svg?react';
 import CloseICON from '@/icons/close.svg?react';
 
-export function FilterButton({
+function FilterButton({
   children = 'Filter',
   badge = 0,
-  hideIcon = false,
-  hideLabel = false,
-  hideBadge = false,
+  icon,
   hideArrow = false,
   onClick = () => {},
   onClear = () => {},
   ...props
 }) {
-  const rightIcon = () => {
-    if (badge > 0) {
-      return <CloseICON onClick={onClear} />;
-    }
-
-    return !hideArrow && <ArrowICON />;
-  };
-
   return (
     <Button
       isActive={!!badge}
-      leftIcon={!hideIcon && <CalendarICON />}
+      leftIcon={icon}
       onClick={onClick}
-      rightIcon={rightIcon()}
+      rightIcon={badge > 0 && <CloseICON onClick={onClear} />}
+      showArrow={!hideArrow && !badge}
       variant="outline"
       {...props}
     >
-      {!hideLabel && children}
-      {!hideBadge && badge > 0 && <span className="font-body">{badge}</span>}
+      {children}
+      {badge > 0 && <span className="font-body">{badge}</span>}
     </Button>
   );
 }
+
+FilterButton.displayName = 'FilterButton';
+
+export { FilterButton };

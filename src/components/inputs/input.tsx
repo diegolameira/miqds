@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import USA from '@/flags/USA.svg?react';
+import USAFlag from '@/flags/USA.svg?react';
 import ArrowDownICON from '@/icons/arrow-down.svg?react';
 import ClearICON from '@/icons/clear.svg?react';
 import EyeCrossedICON from '@/icons/eye-cross.svg?react';
@@ -18,6 +18,8 @@ export interface InputProps
   type?: InputType;
   icon?: React.ReactNode;
   action?: React.ReactNode;
+  value?: string;
+  onChange?: (value: string | React.ChangeEvent<HTMLInputElement>) => void;
   onClear?: () => void;
 }
 
@@ -42,8 +44,55 @@ const patterns = {
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, onClear, ...props }, ref) => {
+  (
+    {
+      className,
+      type,
+      value: defaultValue = '',
+      onChange = () => {},
+      onClear = () => {},
+      ...props
+    },
+    _ref
+  ) => {
     const [isRevealed, setReveal] = React.useState(false);
+
+    const [value, setValue] = React.useState<string>(defaultValue);
+
+    const innerRef = React.useRef<HTMLInputElement | null>();
+
+    const ref = _ref || innerRef;
+
+    // Expose the value and setValue function to the parent component
+    React.useImperativeHandle(ref, () => ({
+      clear: () => {
+        setValue('');
+      },
+      value,
+      setValue,
+    }));
+
+    const handleChange = React.useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+
+        setValue(val);
+        onChange(val);
+      },
+      [onChange]
+    );
+
+    const handleClear = React.useCallback(() => {
+      const val = '';
+
+      setValue(val);
+      onChange(val);
+      onClear();
+    }, [onChange, onClear]);
+
+    React.useEffect(() => {
+      setValue(defaultValue);
+    }, [defaultValue]);
 
     const toggleReveal = () => setReveal((a) => !a);
 
@@ -62,19 +111,22 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     switch (type) {
       case InputType.Search:
         icon = <SearchICON />;
-        action = onClear && !props.disabled && (
+        action = !props.disabled && (
           <Button
             iconOnly
+            className={`transition ${value ? 'opacity-100' : 'opacity-0'}`}
             leftIcon={<ClearICON />}
-            onClick={onClear}
+            onClick={handleClear}
             variant="tertiary"
           />
         );
         break;
       case InputType.Email:
+        props.placeholder = 'Email address';
         icon = <MailICON />;
         break;
       case InputType.Password:
+        props.placeholder = 'Password';
         icon = <LockICON />;
         action = !props.disabled && (
           <Button
@@ -87,10 +139,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         break;
       case InputType.Price:
         icon = <span className="text-bodyM-500">$</span>;
+        props.placeholder = '0.00';
         props.step = 0.01;
         props.min = 0;
         computedType = InputType.Number;
-        props.inputmode = 'numeric';
+        props.inputMode = 'numeric';
         break;
       case InputType.PricePerDistance:
         action = (
@@ -102,41 +155,45 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             $/mi
           </Button>
         );
+        props.placeholder = '0.0';
         props.step = 0.01;
         props.min = 0;
         computedType = InputType.Number;
-        props.inputmode = 'numeric';
+        props.inputMode = 'numeric';
         break;
       case InputType.Distance:
         action = <span className="text-bodyM-500 mr-space12">mi</span>;
+        props.placeholder = '0.0';
         props.step = 0.01;
         props.min = 0;
         computedType = InputType.Number;
-        props.inputmode = 'numeric';
+        props.inputMode = 'numeric';
         break;
       case InputType.CreditCard:
         icon = <CreditCardICON />;
-        props.autocomplete = 'cc-number';
-        props.maxlength = '19';
-        props.placeholder = 'xxxx xxxx xxxx xxxx';
+        props.autoComplete = 'cc-number';
+        props.maxLength = '19';
+        props.placeholder = '1234 1234 1234 1234';
         computedType = InputType.Tel;
-        props.inputmode = 'numeric';
+        props.inputMode = 'numeric';
         break;
       case InputType.Number:
-        props.inputmode = 'numeric';
+        props.placeholder = '1';
+        props.inputMode = 'numeric';
         break;
       case InputType.Tel:
         icon = (
           <Button
             iconOnly
-            className="!pr-space4 !pl-space12 !gap-space2 w-[auto] min-w-[auto] ml-[calc(var(--spacing-space12)/-1)]"
-            leftIcon={<USA />}
+            className="!pr-space4 !pl-space12 !gap-space2 w-[62px] absolute left-0 min-w-[auto] ml-[calc(var(--spacing-space12)/-1)]"
+            leftIcon={<USAFlag />}
             rightIcon={<ArrowDownICON />}
             size="sm"
             variant="tertiary"
           />
         );
-        props.inputmode = 'numeric';
+        props.placeholder = 'Phone number';
+        props.inputMode = 'numeric';
         break;
       default:
         break;
@@ -145,7 +202,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-1 flex-col justify-center relative">
         {Boolean(icon) && (
-          <div className="absolute inline-flex min-w-[20px] h-[20px] left-space12 justify-center items-center text-[hsla(var(--color-icon-default))]">
+          <div className="absolute inline-flex w-[20px] h-[20px] left-space12 justify-center items-center text-[hsla(var(--color-icon-default))]">
             {icon}
           </div>
         )}
@@ -162,11 +219,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
                 icon && (type === InputType.Tel ? 'pl-space64' : 'pl-space40'),
                 action && 'pr-space48',
+                type === InputType.Number &&
+                  '[appearance:number] [&::-webkit-outer-spin-button]:appearance-auto [&::-webkit-inner-spin-button]:appearance-auto',
               ],
               className
             )}
+            onChange={handleChange}
             ref={ref}
             type={isRevealed ? 'text' : computedType}
+            value={value}
             {...props}
           />
         </div>

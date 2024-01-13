@@ -2,6 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
+import ArrowICON from '@/icons/arrow-down-b.svg?react';
 import PersonalICON from '@/icons/personal.svg?react';
 import Spinner from '@/icons/spinner.svg?react';
 import SuitcaseICON from '@/icons/suitcase.svg?react';
@@ -22,12 +23,16 @@ const variants = {
       'transition-shadow bg-outline !text-outline-foreground hover:bg-outline-hover active:bg-outline-pressed disabled:bg-outline-disabled disabled:!text-outline-foreground-disabled shadow-filterButton-shadow-default hover:shadow-filterButton-shadow-hover disabled:shadow-filterButton-shadow-disabled',
     link: 'text-primary underline-offset-4 hover:underline',
     business:
-      'bg-business !text-business-foreground hover:bg-business-hover active:bg-business-pressed disabled:bg-business-disabled disabled:!text-business-foreground-disabled',
+      'w-full bg-business !text-business-foreground hover:bg-business-hover active:bg-business-pressed disabled:bg-business-disabled disabled:!text-business-foreground-disabled',
     personal:
-      'bg-personal !text-personal-foreground hover:bg-personal-hover active:bg-personal-pressed disabled:bg-personal-disabled disabled:!text-personal-foreground-disabled',
+      'w-full bg-personal !text-personal-foreground hover:bg-personal-hover active:bg-personal-pressed disabled:bg-personal-disabled disabled:!text-personal-foreground-disabled',
   },
   iconOnly: {
-    true: 'min-w-[32px] min-h-[32px]',
+    true: 'w-auto min-w-[32px] min-h-[32px]',
+    false: '',
+  },
+  showArrow: {
+    true: '!justify-between align-left',
     false: '',
   },
   isActive: {
@@ -82,17 +87,17 @@ const buttonVariants = cva(
       {
         full: true,
         size: 'default',
-        className: 'py-space8 md:py-space12',
+        className: '!py-space8 md:!py-space12',
       },
       {
         full: true,
         size: 'md',
-        className: 'py-space12',
+        className: '!py-space12',
       },
       {
         full: true,
         size: 'sm',
-        className: 'py-space8',
+        className: '!py-space8',
       },
       {
         variant: 'primary',
@@ -185,6 +190,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       align = 'center',
       size = 'default',
       asChild = false,
+      showArrow,
       children,
       isActive,
       full,
@@ -194,9 +200,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button';
 
-    let { leftIcon } = props;
-
-    const { rightIcon, ...rest } = props;
+    let { leftIcon, rightIcon, ...rest } = props;
 
     let label = children;
 
@@ -210,6 +214,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       label = label || 'Business';
     }
 
+    if (showArrow) {
+      rightIcon = <ArrowICON />;
+    }
+
     return (
       <Comp
         className={cn([
@@ -220,13 +228,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             loading,
             disabled,
             full,
+            showArrow,
             // className,
             isActive,
           }),
           align === 'center'
             ? 'justify-center'
             : align === 'left'
-              ? 'justify-start'
+              ? 'justify-left'
               : 'justify-end',
           leftIcon &&
             !iconOnly &&
@@ -271,7 +280,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn([
               loading && 'invisible',
               iconOnly && 'sr-only',
-              'inline-flex items-baseline justify-center gap-2 align-middle',
+              'inline-flex items-baseline gap-2 align-middle',
+              showArrow && 'flex-1',
             ])}
           >
             {label}
