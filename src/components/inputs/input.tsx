@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import USAFlag from '@/flags/USA.svg?react';
-import ArrowDownICON from '@/icons/arrow-down.svg?react';
 import ClearICON from '@/icons/clear.svg?react';
 import EyeCrossedICON from '@/icons/eye-cross.svg?react';
 import EyeICON from '@/icons/eye.svg?react';
@@ -12,6 +10,8 @@ import CreditCardICON from '@/icons/subscription.svg?react';
 
 import { cn } from '../../lib/utils';
 import { Button } from '../buttons';
+import { CurrencyUnitSelector } from '../currency-unity-selector';
+import { FlagSelector } from '../flag-selector';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -146,15 +146,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         props.inputMode = 'numeric';
         break;
       case InputType.PricePerDistance:
-        action = (
-          <Button
-            className="!text-bodyS-500 !pr-space4 !pl-space12 !gap-space2"
-            rightIcon={<ArrowDownICON />}
-            variant="tertiary"
-          >
-            $/mi
-          </Button>
-        );
+        action = <CurrencyUnitSelector />;
         props.placeholder = '0.0';
         props.step = 0.01;
         props.min = 0;
@@ -182,16 +174,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         props.inputMode = 'numeric';
         break;
       case InputType.Tel:
-        icon = (
-          <Button
-            iconOnly
-            className="!pr-space4 !pl-space12 !gap-space2 w-[62px] absolute left-0 min-w-[auto] ml-[calc(var(--spacing-space12)/-1)]"
-            leftIcon={<USAFlag />}
-            rightIcon={<ArrowDownICON />}
-            size="sm"
-            variant="tertiary"
-          />
-        );
+        icon = <FlagSelector />;
         props.placeholder = 'Phone number';
         props.inputMode = 'numeric';
         break;
@@ -202,7 +185,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-1 flex-col justify-center relative">
         {Boolean(icon) && (
-          <div className="absolute inline-flex w-[20px] h-[20px] left-space12 justify-center items-center text-[hsla(var(--color-icon-default))]">
+          <div
+            className={cn([
+              'absolute inline-flex w-[20px] h-[20px] left-space12 justify-center items-center text-[hsla(var(--color-icon-default))]',
+              type === InputType.Tel &&
+                'w-[auto] ml-[calc(var(--spacing-space12)/-1)]',
+            ])}
+          >
             {icon}
           </div>
         )}
