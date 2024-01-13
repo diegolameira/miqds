@@ -268,7 +268,7 @@ function mileiqPlugin() {
               disabled: 'hsla(var(--color-surface-primary))',
               foreground: {
                 DEFAULT: 'hsla(var(--color-text-primary))',
-                disabled: 'hsla(var(--color-text-primary))',
+                disabled: 'hsla(var(--color-text-tertiary))',
               },
             },
             muted: {

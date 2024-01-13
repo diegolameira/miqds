@@ -20,7 +20,7 @@ const variants = {
     destructive:
       'bg-destructive !text-destructive-foreground hover:bg-destructive-hover active:bg-destructive-pressed disabled:bg-destructive-disabled disabled:!text-destructive-foreground-disabled',
     outline:
-      'transition-shadow bg-outline !text-outline-foreground hover:bg-outline-hover active:bg-outline-pressed disabled:bg-outline-disabled disabled:!text-outline-foreground-disabled shadow-filterButton-shadow-default hover:shadow-filterButton-shadow-hover disabled:shadow-filterButton-shadow-disabled',
+      'transition-shadow bg-outline !text-outline-foreground hover:bg-outline-hover active:bg-outline-pressed disabled:bg-outline-disabled disabled:!text-outline-foreground-disabled shadow-filterButton-shadow-default hover:shadow-filterButton-shadow-hover',
     link: 'text-primary underline-offset-4 hover:underline',
     business:
       'w-full bg-business !text-business-foreground hover:bg-business-hover active:bg-business-pressed disabled:bg-business-disabled disabled:!text-business-foreground-disabled',
@@ -77,7 +77,8 @@ const buttonVariants = cva(
       {
         variant: 'outline',
         isActive: true,
-        className: 'shadow-filterButton-shadow-hover',
+        className:
+          'shadow-filterButton-shadow-hover disabled:shadow-filterButton-shadow-default',
       },
       {
         size: 'default',
