@@ -1,28 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button, ButtonVariantsKeys } from '../button';
+import { Button } from '../button';
 
 const meta = {
   component: Button,
   title: 'Components/Buttons/Classification',
   tags: ['autodocs'],
-  args: {},
+  args: {
+    disabled: false,
+  },
   argTypes: {
-    ...Object.entries(ButtonVariantsKeys).reduce(
-      (acc, [key, val]) => ({
-        ...acc,
-        [key]: {
-          options: val,
-          control: {
-            type: 'select',
-          },
-        },
-      }),
-      {}
-    ),
-    disabled: { control: 'boolean' },
-    iconOnly: { control: 'boolean' },
-    loading: { control: 'boolean' },
+    onClick: {
+      control: false,
+      description: 'Click handler',
+      type: { name: 'function', required: false },
+    },
+    disabled: { type: { name: 'boolean' }, description: 'Disables the button' },
   },
   parameters: {
     design: {
@@ -41,7 +34,6 @@ export const Business: SortedStory = {
   sort: 0,
   args: {
     variant: 'business',
-    align: 'center',
   },
 };
 

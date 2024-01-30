@@ -9,9 +9,9 @@ const CreditCardInput = React.forwardRef<HTMLInputElement, InputProps>(
     { className, value: defaultValue = '', onChange = () => {}, ...props },
     _ref
   ) => {
-    const innerRef = React.useRef<HTMLInputElement | null>();
+    const innerRef = React.useRef();
 
-    const ref = _ref || innerRef;
+    const ref = _ref ?? innerRef;
 
     const handleChange = React.useCallback(
       (val: string) => {

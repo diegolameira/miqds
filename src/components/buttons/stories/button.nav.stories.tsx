@@ -5,30 +5,21 @@ import ReportsICON from '@/icons/reports.svg?react';
 import SettingsICON from '@/icons/settings.svg?react';
 import SubscriptionICON from '@/icons/subscription.svg?react';
 
-import { ButtonVariantsKeys, NavButton } from '..';
+import { NavButton } from '..';
 
 const meta = {
   component: NavButton,
   title: 'Components/Buttons/NavButton',
   tags: ['autodocs'],
-
   args: {},
   argTypes: {
-    ...Object.entries(ButtonVariantsKeys).reduce(
-      (acc, [key, val]) => ({
-        ...acc,
-        [key]: {
-          options: val,
-          control: {
-            type: 'select',
-          },
-        },
-      }),
-      {}
-    ),
-    disabled: { control: 'boolean' },
-    iconOnly: { control: 'boolean', defaultValue: true },
-    loading: { control: 'boolean' },
+    onClick: { control: false },
+    leftIcon: { control: false },
+    isActive: {
+      control: false,
+      type: { name: 'boolean' },
+      description: 'Active navigation style',
+    },
   },
   parameters: {
     design: {
@@ -43,19 +34,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 type SortedStory = Story & { sort: number };
 
-export const NavButtonDefault: SortedStory = {
-  sort: 0,
-  args: {},
-};
-
 export const Navigation: SortedStory = {
   sort: 0,
-  args: {
-    variant: 'tertiary',
-  },
+  args: {},
   render: (args) => (
     <div className="w-full max-w-[220px]">
-      <div className="border border-2 border-[#7f7f7f]/20 border-dashed flex flex-col gap-space2 p-space4">
+      <div className="flex flex-col gap-space2 p-space4">
         <NavButton {...args} isActive leftIcon={<CarICON />}>
           Drives
         </NavButton>
@@ -69,7 +53,6 @@ export const Navigation: SortedStory = {
           Settings
         </NavButton>
       </div>
-      <p className="text-[#7f7f7f]/40">max-width: 220px gap-space2</p>
     </div>
   ),
 };

@@ -4,13 +4,19 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'airbnb',
-    'airbnb/hooks',
-    'airbnb-typescript',
+    'eslint:recommended',
+    'plugin:import/errors',
     'plugin:react/recommended',
+    'plugin:json/recommended',
+    // 'airbnb',
+    // 'airbnb/hooks',
+    // "airbnb-typescript",
     'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
     'plugin:storybook/recommended',
     'plugin:prettier/recommended',
+    'prettier',
   ],
   overrides: [],
   parser: '@typescript-eslint/parser',
@@ -19,57 +25,11 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['prettier', 'react', 'jsx-a11y', '@typescript-eslint'],
   rules: {
+    'react/jsx-curly-brace-presence': 'error',
+    'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'no-console': 'error',
-    'react/jsx-props-no-spreading': 'off',
-    'max-len': [
-      // ? https://eslint.org/docs/rules/max-len
-      'error',
-      {
-        code: 150,
-      },
-    ],
-    'padding-line-between-statements': [
-      // ? https://eslint.org/docs/latest/rules/padding-line-between-statements
-      'error',
-      {
-        blankLine: 'always',
-        prev: '*',
-        next: 'return',
-      },
-      {
-        blankLine: 'always',
-        prev: ['const', 'let', 'function'],
-        next: '*',
-      },
-      {
-        blankLine: 'always',
-        prev: ['*'],
-        next: ['if', 'switch', 'while', 'try', 'function'],
-      },
-      {
-        blankLine: 'always',
-        prev: ['if', 'switch', 'while', 'try', 'function'],
-        next: ['*'],
-      },
-      {
-        blankLine: 'always',
-        prev: ['export'],
-        next: ['*'],
-      },
-    ],
-    'import/prefer-default-export': 'off',
-    'react/jsx-sort-props': [
-      // ? https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-sort-props.md
-      'error',
-      {
-        shorthandFirst: true,
-      },
-    ],
-    'react/require-default-props': ['off'],
-    'no-else-return': 'error',
-    // ? https://eslint.org/docs/rules/no-else-return
+    'prettier/prettier': 'error',
   },
 };

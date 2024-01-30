@@ -10,6 +10,11 @@ const meta = {
   argTypes: {
     value: { defaultValue: '', control: 'text' },
     disabled: { control: 'boolean' },
+    onChange: { control: false },
+    onClear: {
+      control: false,
+      description: 'Callback when clearing the content, only search input',
+    },
   },
   parameters: {
     design: {

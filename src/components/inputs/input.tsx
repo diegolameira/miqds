@@ -138,7 +138,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         );
         break;
       case InputType.Price:
-        icon = <span className="text-bodyM-500">$</span>;
+        icon = <span className="text-bodyM-500 text-tertiary">$</span>;
         props.placeholder = '0.00';
         props.step = 0.01;
         props.min = 0;
@@ -146,7 +146,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         props.inputMode = 'numeric';
         break;
       case InputType.PricePerDistance:
-        action = <CurrencyUnitSelector />;
+        action = <CurrencyUnitSelector className="" />;
         props.placeholder = '0.0';
         props.step = 0.01;
         props.min = 0;
@@ -191,6 +191,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               type !== InputType.Tel && 'pointer-events-none',
               type === InputType.Tel &&
                 'w-[auto] ml-[calc(var(--spacing-space12)/-1)]',
+              type === InputType.Price && 'left-space8',
+              props.disabled && 'opacity-60',
             ])}
           >
             {icon}
@@ -203,11 +205,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 'flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed',
 
                 'flex-row gap-space-4 px-space12 py-space8',
-                'transition-all placeholder:text-[hsla(var(--text-tertiary))] text-[hsla(var(--color-text-primary))] border-[hsla(var(--color-border-default))] bg-[hsla(var(--color-surface-primary))]',
+                'transition-shadow placeholder:text-[hsla(var(--text-tertiary))] text-[hsla(var(--color-text-primary))] border-[hsla(var(--color-border-default))] bg-[hsla(var(--color-surface-primary))]',
                 'hover:border-[hsla(var(--color-border-medium))] focus-visible:border-[hsla(var(--color-border-active))] focus-visible:ring-border-active',
-                'disabled:bg-[hsla(var(--color-surface-highlight))] disabled:!text-[hsla(var(--text-tertiary))] disabled:border-0',
+                'disabled:bg-[hsla(var(--color-surface-highlight))] disabled:!text-[hsla(var(--text-tertiary))] disabled:border-transparent',
 
-                icon && (type === InputType.Tel ? 'pl-space64' : 'pl-space40'),
+                icon &&
+                  (type === InputType.Tel
+                    ? 'pl-space64'
+                    : type === InputType.Price
+                      ? 'pl-[28px]'
+                      : 'pl-space40'),
+
                 action && 'pr-space48',
                 type === InputType.Number &&
                   '[appearance:number] [&::-webkit-outer-spin-button]:appearance-auto [&::-webkit-inner-spin-button]:appearance-auto',
@@ -226,6 +234,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={cn([
               'absolute inline-flex h-[20px] right-0 justify-center items-center text-[hsla(var(--color-icon-default))]',
               type === InputType.Distance && 'pointer-events-none',
+              props.disabled && 'opacity-60',
             ])}
           >
             {action}

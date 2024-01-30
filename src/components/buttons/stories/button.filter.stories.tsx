@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import CalendarICON from '@/icons/calender.svg?react';
-import { ButtonVariantsKeys, FilterButton } from '..';
+import { FilterButton } from '..';
 
 const meta = {
   component: FilterButton,
@@ -10,23 +10,32 @@ const meta = {
 
   args: {
     children: 'Filter',
+    hideArrow: false,
+    badge: 0,
+    disabled: false,
   },
   argTypes: {
-    ...Object.entries(ButtonVariantsKeys).reduce(
-      (acc, [key, val]) => ({
-        ...acc,
-        [key]: {
-          options: val,
-          control: {
-            type: 'select',
-          },
-        },
-      }),
-      {}
-    ),
-    disabled: { control: 'boolean' },
-    iconOnly: { control: 'boolean', defaultValue: true },
-    loading: { control: 'boolean' },
+    icon: {
+      control: false,
+      description: 'Icon to display on the left',
+      type: { name: 'function', required: false },
+    },
+    onClick: {
+      control: false,
+      description: 'Click handler',
+      type: { name: 'function', required: false },
+    },
+    onClear: {
+      control: false,
+      description: 'Clears the filter',
+      type: { name: 'function', required: false },
+    },
+    disabled: { type: { name: 'boolean' }, description: 'Disables the button' },
+    hideArrow: {
+      type: { name: 'boolean' },
+      description: 'Hides the arrow',
+    },
+    badge: { type: 'number' },
   },
   parameters: {
     design: {

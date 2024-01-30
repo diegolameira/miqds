@@ -27,6 +27,8 @@ const meta = {
       }),
       {}
     ),
+    onClick: { control: false },
+    leftIcon: { control: false },
     disabled: { control: 'boolean' },
     iconOnly: { control: 'boolean', defaultValue: true },
     loading: { control: 'boolean' },

@@ -14,7 +14,13 @@ import UKFlag from '@/flags/uk.svg?react';
 import ArrowDownICON from '@/icons/arrow-down.svg?react';
 import { cn } from '@/lib/utils';
 
-const FlagSelectorOptions = [
+type FlagOption = {
+  label: string;
+  value: string;
+  icon: React.ComponentType;
+};
+
+const FlagSelectorOptions: FlagOption[] = [
   {
     label: 'United States (+1)',
     value: 'US',
@@ -32,8 +38,15 @@ const FlagSelectorOptions = [
   },
 ];
 
-function FlagSelector({ className, onChange = () => {} }) {
-  const [selected, setSelected] = React.useState(FlagSelector.options[0]);
+interface FlagSelectorProps {
+  className?: string;
+  onChange?: (value: string) => void;
+}
+
+function FlagSelector({ className, onChange = () => {} }: FlagSelectorProps) {
+  const [selected, setSelected] = React.useState<FlagOption>(
+    FlagSelectorOptions[0]
+  );
 
   return (
     <DropdownMenu>
@@ -51,7 +64,7 @@ function FlagSelector({ className, onChange = () => {} }) {
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        {FlagSelector.options.map((option) => (
+        {FlagSelectorOptions.map((option) => (
           <DropdownMenuItem
             key={option.value}
             onSelect={() => {
@@ -69,6 +82,5 @@ function FlagSelector({ className, onChange = () => {} }) {
 }
 
 FlagSelector.displayName = 'FlagSelector';
-FlagSelector.options = FlagSelectorOptions;
 
 export { FlagSelector };

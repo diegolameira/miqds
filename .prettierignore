@@ -1,0 +1,13 @@
+build/
+dist/
+coverage/
+node_modules/
+.yarn/
+.parcel-cache/
+.husky/
+.github/
+
+# public/
+# src/assets
+# src/docs/assets
+# src/__snapshots__

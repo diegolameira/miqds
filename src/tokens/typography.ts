@@ -41,19 +41,19 @@ export type Typography = {
   [key in FontTypes as string]: CSSProperties & { fontWeights: FontWeight[] };
 };
 
-const originalfonts = {
-  semibold: 'Graphik-Semibold',
-  regular: 'Graphik-Regular',
-  medium: 'Graphik-Medium',
-};
+// const originalfonts = {
+//   semibold: 'Graphik-Semibold',
+//   regular: 'Graphik-Regular',
+//   medium: 'Graphik-Medium',
+// };
 
-const webfontkit = {
+const _webfontkit = {
   semibold: 'graphiksemibold',
   regular: 'graphik_regularregular',
   medium: 'graphikmedium',
 };
 
-const fontset = originalfonts;
+const fontset = _webfontkit;
 
 export const fontFamily = `"${fontset.regular}", Helvetica, sans-serif`;
 

@@ -1,5 +1,27 @@
 {
   "compilerOptions": {
+    "rootDir": "../../",
+    "composite": true,
+    "allowJs": false,
+    "declarationMap": true,
+    "incremental": true,
+    // "outDir": "./dist",
+    // "module": "CommonJS",
+    "removeComments": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@pkgs/*": ["pkgs/*"],
+    //   "@libs/*": ["libs/*"],
+    //   "@apps/*": ["apps/*"]
+    // },
+
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
