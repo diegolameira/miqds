@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-import { Button } from '@/components/buttons';
+import { Button } from '$components/buttons';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '$components/dropdown-menu';
 
-import USAFlag from '@/flags/USA.svg?react';
-import CAFlag from '@/flags/ca.svg?react';
-import UKFlag from '@/flags/uk.svg?react';
-import ArrowDownICON from '@/icons/arrow-down.svg?react';
-import { cn } from '@/lib/utils';
+import USAFlag from '$flags/USA.svg?react';
+import CAFlag from '$flags/ca.svg?react';
+import UKFlag from '$flags/uk.svg?react';
+import ArrowDownICON from '$icons/arrow-down.svg?react';
+import { cn } from '$lib/utils';
 
 type FlagOption = {
   label: string;
@@ -45,7 +45,7 @@ interface FlagSelectorProps {
 
 function FlagSelector({ className, onChange = () => {} }: FlagSelectorProps) {
   const [selected, setSelected] = React.useState<FlagOption>(
-    FlagSelectorOptions[0]
+    FlagSelectorOptions[0],
   );
 
   return (

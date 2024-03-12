@@ -1,16 +1,16 @@
 import * as React from 'react';
 
-import { Button } from '@/components/buttons';
+import { Button } from '$components/buttons';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/dropdown-menu';
+} from '$components/dropdown-menu';
 
-import ArrowDownICON from '@/icons/arrow-down.svg?react';
+import ArrowDownICON from '$icons/arrow-down.svg?react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '$lib/utils';
 
 type CurrencyUnitOption = {
   label: string;
@@ -32,20 +32,21 @@ const CurrencyUnitOptions: CurrencyUnitOption[] = [
   },
 ];
 
-export interface CurrencyUnitySelectorProps
-  extends React.HTMLAttributes<HTMLSelectElement> {
+export interface CurrencyUnitySelectorProps {
   align?: 'start' | 'end';
+  className?: string;
   onChange?: (value: string) => void;
 }
 
-const CurrencyUnitSelector = React.forwardRef<
-  HTMLSelectElement,
-  CurrencyUnitySelectorProps
->(({ className, align = 'end', onChange = () => {} }, ref) => {
+const CurrencyUnitSelector = ({
+  align = 'end',
+  className,
+  onChange = () => {},
+}: CurrencyUnitySelectorProps) => {
   const [selected, setSelected] = React.useState(CurrencyUnitOptions[0]);
 
   return (
-    <DropdownMenu ref={ref}>
+    <DropdownMenu>
       <DropdownMenuTrigger>
         <Button
           children={selected.label}
@@ -72,6 +73,6 @@ const CurrencyUnitSelector = React.forwardRef<
       </DropdownMenuContent>
     </DropdownMenu>
   );
-});
+};
 
 export { CurrencyUnitSelector };

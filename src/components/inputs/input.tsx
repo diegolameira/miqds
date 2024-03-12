@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import ClearICON from '@/icons/clear.svg?react';
-import EyeCrossedICON from '@/icons/eye-cross.svg?react';
-import EyeICON from '@/icons/eye.svg?react';
-import LockICON from '@/icons/lock.svg?react';
-import MailICON from '@/icons/mail.svg?react';
-import SearchICON from '@/icons/search.svg?react';
-import CreditCardICON from '@/icons/subscription.svg?react';
+import ClearICON from '$icons/clear.svg?react';
+import EyeCrossedICON from '$icons/eye-cross.svg?react';
+import EyeICON from '$icons/eye.svg?react';
+import LockICON from '$icons/lock.svg?react';
+import MailICON from '$icons/mail.svg?react';
+import SearchICON from '$icons/search.svg?react';
+import CreditCardICON from '$icons/subscription.svg?react';
 
 import { cn } from '../../lib/utils';
 import { Button } from '../buttons';
@@ -14,12 +14,15 @@ import { CurrencyUnitSelector } from '../currency-unity-selector';
 import { FlagSelector } from '../flag-selector';
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  type?: InputType;
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  type?: InputType | string;
   icon?: React.ReactNode;
   action?: React.ReactNode;
   value?: string;
-  onChange?: (value: string | React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    value: string,
+    event?: React.ChangeEvent<HTMLInputElement>,
+  ) => void;
   onClear?: () => void;
 }
 
@@ -47,39 +50,39 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
-      type,
+      type = InputType.Text,
       value: defaultValue = '',
       onChange = () => {},
       onClear = () => {},
       ...props
     },
-    _ref
+    ref,
   ) => {
     const [isRevealed, setReveal] = React.useState(false);
 
     const [value, setValue] = React.useState<string>(defaultValue);
 
-    const innerRef = React.useRef<HTMLInputElement | null>();
+    // const innerRef = React.useRef<HTMLInputElement | null>();
 
-    const ref = _ref || innerRef;
+    // const ref = _ref || innerRef;
 
     // Expose the value and setValue function to the parent component
-    React.useImperativeHandle(ref, () => ({
-      clear: () => {
-        setValue('');
-      },
-      value,
-      setValue,
-    }));
+    // React.useImperativeHandle(ref, () => ({
+    //   clear: () => {
+    //     setValue('');
+    //   },
+    //   value,
+    //   setValue,
+    // }));
 
     const handleChange = React.useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
 
         setValue(val);
-        onChange(val);
+        onChange(val, e);
       },
-      [onChange]
+      [onChange],
     );
 
     const handleClear = React.useCallback(() => {
@@ -102,10 +105,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     let computedType = type;
 
-    const pattern = patterns[type as InputType];
-
-    if (pattern) {
-      props.pattern = pattern;
+    if (Object.hasOwn(patterns, type)) {
+      props.pattern = patterns[type as keyof typeof patterns];
     }
 
     switch (type) {
@@ -114,7 +115,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         action = !props.disabled && (
           <Button
             iconOnly
-            className={`transition ${value ? 'opacity-100' : 'opacity-0'}`}
+            className={cn([
+              `transition ${value ? 'opacity-100' : 'opacity-0'}`,
+            ])}
             leftIcon={<ClearICON />}
             onClick={handleClear}
             variant="tertiary"
@@ -122,15 +125,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         );
         break;
       case InputType.Email:
-        props.placeholder = 'Email address';
+        props.placeholder = props.placeholder ?? 'Email address';
         icon = <MailICON />;
         break;
       case InputType.Password:
-        props.placeholder = 'Password';
+        props.placeholder = props.placeholder ?? 'Password';
         icon = <LockICON />;
         action = !props.disabled && (
           <Button
             iconOnly
+            className={cn(['hover:!bg-transparent active:!bg-transparent'])}
             leftIcon={isRevealed ? <EyeCrossedICON /> : <EyeICON />}
             onClick={toggleReveal}
             variant="tertiary"
@@ -139,15 +143,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         break;
       case InputType.Price:
         icon = <span className="text-bodyM-500 text-tertiary">$</span>;
-        props.placeholder = '0.00';
+        props.placeholder = props.placeholder ?? '0.00';
         props.step = 0.01;
         props.min = 0;
         computedType = InputType.Number;
         props.inputMode = 'numeric';
         break;
       case InputType.PricePerDistance:
-        action = <CurrencyUnitSelector className="" />;
-        props.placeholder = '0.0';
+        action = (
+          <CurrencyUnitSelector
+            className={cn(['hover:!bg-transparent active:!bg-transparent'])}
+          />
+        );
+        props.placeholder = props.placeholder ?? '0.0';
         props.step = 0.01;
         props.min = 0;
         computedType = InputType.Number;
@@ -155,7 +163,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         break;
       case InputType.Distance:
         action = <span className="text-bodyM-500 mr-space12">mi</span>;
-        props.placeholder = '0.0';
+        props.placeholder = props.placeholder ?? '0.0';
         props.step = 0.01;
         props.min = 0;
         computedType = InputType.Number;
@@ -165,16 +173,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         icon = <CreditCardICON />;
         props.autoComplete = 'cc-number';
         props.maxLength = 19;
-        props.placeholder = '1234 1234 1234 1234';
+        props.placeholder = props.placeholder ?? '1234 1234 1234 1234';
         computedType = InputType.Tel;
         props.inputMode = 'numeric';
         break;
       case InputType.Number:
-        props.placeholder = '1';
+        props.placeholder = props.placeholder ?? '1';
         props.inputMode = 'numeric';
         break;
       case InputType.Tel:
-        icon = <FlagSelector />;
+        icon = (
+          <FlagSelector
+            className={cn(['hover:!bg-transparent active:!bg-transparent'])}
+          />
+        );
         props.placeholder = 'Phone number';
         props.inputMode = 'numeric';
         break;
@@ -220,7 +232,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 type === InputType.Number &&
                   '[appearance:number] [&::-webkit-outer-spin-button]:appearance-auto [&::-webkit-inner-spin-button]:appearance-auto',
               ],
-              className
+              className,
             )}
             onChange={handleChange}
             ref={ref}
@@ -242,7 +254,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = 'Input';
