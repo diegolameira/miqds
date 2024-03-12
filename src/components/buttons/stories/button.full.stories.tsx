@@ -21,7 +21,7 @@ const meta = {
           },
         },
       }),
-      {}
+      {},
     ),
     disabled: { control: 'boolean' },
     iconOnly: { control: 'boolean', defaultValue: true },

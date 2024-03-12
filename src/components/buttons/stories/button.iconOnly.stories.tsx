@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddICON from '@/icons/add.svg?react';
-import TrashICON from '@/icons/trash-alt.svg?react';
+import AddICON from '$icons/add.svg?react';
+import TrashICON from '$icons/trash-alt.svg?react';
 
 import { Button, ButtonVariantsKeys } from '../button';
 
@@ -25,7 +25,7 @@ const meta = {
           },
         },
       }),
-      {}
+      {},
     ),
     onClick: { control: false },
     leftIcon: { control: false },

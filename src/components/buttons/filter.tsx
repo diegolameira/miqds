@@ -1,7 +1,7 @@
-import { Button, ButtonProps } from '@/components/buttons';
+import { Button, ButtonProps } from '$components/buttons';
 import * as React from 'react';
 
-import CloseICON from '@/icons/close.svg?react';
+import CloseICON from '$icons/close.svg?react';
 
 export interface FilterButtonProps extends ButtonProps {
   badge?: number;

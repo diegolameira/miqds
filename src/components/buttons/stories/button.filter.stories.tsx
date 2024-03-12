@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CalendarICON from '@/icons/calender.svg?react';
+import CalendarICON from '$icons/calendar.svg?react';
 import { FilterButton } from '..';
 
 const meta = {

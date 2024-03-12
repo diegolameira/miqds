@@ -2,12 +2,12 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
-import ArrowICON from '@/icons/arrow-down-b.svg?react';
-import PersonalICON from '@/icons/personal.svg?react';
-import Spinner from '@/icons/spinner.svg?react';
-import SuitcaseICON from '@/icons/suitcase.svg?react';
+import ArrowICON from '$icons/arrow-down-b.svg?react';
+import PersonalICON from '$icons/personal.svg?react';
+import Spinner from '$icons/spinner.svg?react';
+import SuitcaseICON from '$icons/suitcase.svg?react';
 
-import { cn } from '../../lib/utils';
+import { cn } from '$lib/utils';
 
 const variants = {
   variant: {
@@ -153,7 +153,7 @@ const buttonVariants = cva(
       variant: 'secondary',
       size: 'default',
     },
-  }
+  },
 );
 
 export const ButtonVariantsKeys = Object.entries(variants).reduce(
@@ -162,7 +162,7 @@ export const ButtonVariantsKeys = Object.entries(variants).reduce(
 
     return acc;
   },
-  {} as { [key: string]: string[] }
+  {} as { [key: string]: string[] },
 );
 
 export interface ButtonProps
@@ -197,7 +197,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       full,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : 'button';
 
@@ -230,7 +230,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             disabled,
             full,
             showArrow,
-            // className,
             isActive,
           }),
           align === 'center'
@@ -261,7 +260,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <>
           {loading && (
             <>
-              <span className={cn('w-[20px] absolute animate-spin')}>
+              <span className={cn('max-w-[21px] absolute animate-spin')}>
                 <Spinner />
               </span>
               <span className="sr-only">Loading...</span>
@@ -300,7 +299,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         </>
       </Comp>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';

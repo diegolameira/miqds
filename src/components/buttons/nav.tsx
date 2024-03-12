@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from '@/components/buttons';
+import { Button, ButtonProps } from '$components/buttons';
+import { cn } from '$lib/utils';
 import * as React from 'react';
 
 export interface NavButtonProps extends ButtonProps {
@@ -6,11 +7,11 @@ export interface NavButtonProps extends ButtonProps {
 }
 
 const NavButton = React.forwardRef<HTMLButtonElement, NavButtonProps>(
-  ({ icon, onClick = () => {}, ...props }, ref) => {
+  ({ icon, onClick = () => {}, className, ...props }, ref) => {
     return (
       <Button
         align="left"
-        className="font-bodyM-400"
+        className={cn(['font-bodyM-400', className])}
         leftIcon={icon}
         onClick={onClick}
         ref={ref}
@@ -18,7 +19,7 @@ const NavButton = React.forwardRef<HTMLButtonElement, NavButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 NavButton.displayName = 'NavButton';

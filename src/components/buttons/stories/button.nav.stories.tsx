@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CarICON from '@/icons/car.svg?react';
-import ReportsICON from '@/icons/reports.svg?react';
-import SettingsICON from '@/icons/settings.svg?react';
-import SubscriptionICON from '@/icons/subscription.svg?react';
+import CarICON from '$icons/car.svg?react';
+import ReportsICON from '$icons/reports.svg?react';
+import SettingsICON from '$icons/settings.svg?react';
+import SubscriptionICON from '$icons/subscription.svg?react';
 
 import { NavButton } from '..';
 
