@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss';
 import animatePlugin from 'tailwindcss-animate';
 import plugin from 'tailwindcss/plugin';
 
-import { breakpoints } from '$tokens/breakpoints';
+import { breakpoints } from '../tokens/breakpoints';
 import { semanticColors } from '../tokens/colors';
 import { radii } from '../tokens/radius';
 import { shadows } from '../tokens/shadows';
