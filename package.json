@@ -23,7 +23,7 @@
   ],
   "sideEffects": false,
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "start": "storybook dev -p 6006",
