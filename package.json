@@ -1,12 +1,7 @@
 {
   "name": "@mileiq/design-system",
   "license": "MIT",
-  "author": {
-    "name": "Diego Lameira",
-    "email": "diego@mileiq.com"
-  },
-  "readme": "README.md",
-  "private": true,
+  "author": "Diego Lameira <diego@mileiq.com>",
   "version": "1.0.0",
   "type": "module",
   "main": "dist/design-system.umd.js",
@@ -14,7 +9,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mileiq/design-system.git"
+    "url": "git+https://github.com/mileiq/design-system.git"
   },
   "exports": {
     ".": {
@@ -114,5 +109,10 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.0.2",
+  "description": "README.md",
+  "bugs": {
+    "url": "https://github.com/mileiq/design-system/issues"
+  },
+  "homepage": "https://github.com/mileiq/design-system#readme"
 }
