@@ -1,8 +1,8 @@
-import autoPrefix from 'autoprefixer';
 import type { Config } from 'tailwindcss';
 import animatePlugin from 'tailwindcss-animate';
 import plugin from 'tailwindcss/plugin';
 
+import { breakpoints } from '$tokens/breakpoints';
 import { semanticColors } from '../tokens/colors';
 import { radii } from '../tokens/radius';
 import { shadows } from '../tokens/shadows';
@@ -27,7 +27,7 @@ export default {
   darkMode: 'class',
   safelist: ['dark'],
   content: [],
-  plugins: [autoPrefix, animatePlugin, mileiqPlugin()],
+  plugins: [animatePlugin, mileiqPlugin()],
 } satisfies Config;
 
 function mileiqPlugin() {
@@ -93,19 +93,19 @@ function mileiqPlugin() {
           '--accent': '210 40% 96.1%',
           '--accent-foreground': '222.2 47.4% 11.2%',
           '--destructive': fromHSLA(
-            semanticColors.Interaction.destructive.light
+            semanticColors.Interaction.destructive.light,
           ),
           '--destructive-foreground': fromHSLA(
-            semanticColors.Text.invert.light
+            semanticColors.Text.invert.light,
           ),
           '--destructive-hover': fromHSLA(
-            semanticColors.Interaction.destructiveHover.light
+            semanticColors.Interaction.destructiveHover.light,
           ),
           '--destructive-pressed': fromHSLA(
-            semanticColors.Interaction.destructivePressed.light
+            semanticColors.Interaction.destructivePressed.light,
           ),
           '--destructive-disabled': fromHSLA(
-            semanticColors.Interaction.disabled.light
+            semanticColors.Interaction.disabled.light,
           ),
           '--border': '214.3 31.8% 91.4%',
           '--input': '214.3 31.8% 91.4%',
@@ -158,17 +158,17 @@ function mileiqPlugin() {
           '--accent': '217.2 32.6% 17.5%',
           '--accent-foreground': '210 40% 98%',
           '--destructive': fromHSLA(
-            semanticColors.Interaction.destructive.dark
+            semanticColors.Interaction.destructive.dark,
           ),
           '--destructive-foreground': fromHSLA(semanticColors.Text.invert.dark),
           '--destructive-hover': fromHSLA(
-            semanticColors.Interaction.destructiveHover.dark
+            semanticColors.Interaction.destructiveHover.dark,
           ),
           '--destructive-pressed': fromHSLA(
-            semanticColors.Interaction.destructivePressed.dark
+            semanticColors.Interaction.destructivePressed.dark,
           ),
           '--destructive-disabled': fromHSLA(
-            semanticColors.Interaction.disabled.dark
+            semanticColors.Interaction.disabled.dark,
           ),
           '--border': '217.2 32.6% 17.5%',
           '--input': '217.2 32.6% 17.5%',
@@ -187,6 +187,23 @@ function mileiqPlugin() {
     },
     {
       theme: {
+        screens: {
+          // mobile-first approach
+          // phone-only: zero:max-s;
+          // 'md': [
+          //   // Sidebar appears at 768px, so revert to `sm:` styles between 768px
+          //   // and 868px, after which the main content area is wide enough again to
+          //   // apply the `md:` styles.
+          //   {'min': '668px', 'max': '767px'},
+          //   {'min': '868px'}
+          // ],
+          ...Object.entries(breakpoints).reduce((prev, [key, val]) => {
+            return {
+              ...prev,
+              [key]: { raw: `screen AND ${val}` },
+            };
+          }, {}),
+        },
         container: {
           center: true,
           padding: '2rem',
@@ -201,6 +218,7 @@ function mileiqPlugin() {
             ring: 'hsla(var(--ring) / 0.6)',
             background: 'hsla(var(--background))',
             foreground: 'hsla(var(--foreground))',
+            ...extractColors(semanticColors).variables,
             primary: {
               DEFAULT: 'hsla(var(--color-interaction-primary))',
               hover: 'hsla(var(--color-interaction-primary-hover))',
@@ -316,6 +334,6 @@ function mileiqPlugin() {
           },
         },
       },
-    }
+    },
   );
 }

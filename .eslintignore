@@ -13,7 +13,8 @@ coverage/
 public/
 src/typings.d.ts
 
-index.ts
+vite.config.ts
+.eslintrc.cjs
 tailwind.config.js
 postcss.config.js
 /src/vite-env.d.ts

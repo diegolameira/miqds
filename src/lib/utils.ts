@@ -1,11 +1,11 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { SemanticColors } from '../tokens/colors';
-import { Radii } from '../tokens/radius';
-import { Shadows } from '../tokens/shadows';
-import { Spacing } from '../tokens/spacing';
-import { Typography } from '../tokens/typography';
+import { SemanticColors } from '$tokens/colors';
+import { Radii } from '$tokens/radius';
+import { Shadows } from '$tokens/shadows';
+import { Spacing } from '$tokens/spacing';
+import { Typography } from '$tokens/typography';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -43,7 +43,7 @@ export function extractRadiis(radii: Radii, prefix: string) {
         },
       };
     },
-    { theme: {}, base: {} }
+    { theme: {}, base: {} },
   );
 }
 
@@ -51,6 +51,7 @@ export function extractColors(semanticColors: SemanticColors) {
   const result = {
     light: {},
     dark: {},
+    variables: {},
   };
 
   Object.keys(semanticColors).forEach((category) => {
@@ -60,7 +61,7 @@ export function extractColors(semanticColors: SemanticColors) {
       // snake case the variant with dash and all lower case
       const snakeCaseVariant = variant.replace(
         /([A-Z])/g,
-        (g) => `-${g[0].toLowerCase()}`
+        (g) => `-${g[0].toLowerCase()}`,
       );
 
       const variantColor = semanticColors[category][variant];
@@ -71,9 +72,11 @@ export function extractColors(semanticColors: SemanticColors) {
       (result.dark as Record<string, string>)[
         `--color-${lowerCaseCategory}-${snakeCaseVariant}`
       ] = fromHSLA(variantColor.dark);
+      (result.variables as Record<string, string>)[
+        `${lowerCaseCategory}-${snakeCaseVariant}`
+      ] = `hsla(var(--color-${lowerCaseCategory}-${snakeCaseVariant}))`;
     });
   });
-
   return result;
 }
 
@@ -91,7 +94,7 @@ export function extractSpacing(spacing: Spacing) {
         },
       };
     },
-    { theme: {}, base: {} }
+    { theme: {}, base: {} },
   );
 }
 
@@ -125,7 +128,7 @@ export function extractTypography(typography: Typography) {
     {
       theme: {},
       base: {},
-    }
+    },
   );
 }
 
@@ -143,6 +146,6 @@ export function extractShadows(shadows: Shadows) {
         },
       };
     },
-    { theme: {}, base: {} }
+    { theme: {}, base: {} },
   );
 }

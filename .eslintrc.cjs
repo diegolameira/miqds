@@ -12,6 +12,7 @@ module.exports = {
     // 'airbnb/hooks',
     // "airbnb-typescript",
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:storybook/recommended',
@@ -21,11 +22,13 @@ module.exports = {
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    jsx: true,
     ecmaVersion: 'latest',
     sourceType: 'module',
+    tsconfigRootDir: './',
     project: './tsconfig.json',
   },
-  plugins: ['prettier', 'react', 'jsx-a11y', '@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'import', 'prettier', 'react', 'jsx-a11y'],
   rules: {
     'react/jsx-curly-brace-presence': 'error',
     'react/jsx-uses-react': 'off',

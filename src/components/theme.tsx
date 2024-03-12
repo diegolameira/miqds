@@ -1,12 +1,14 @@
+import { autoStorage } from '$lib/storage';
 import {
   createContext,
+  useContext,
   useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from 'react';
 
-import './theme.css';
+import '../index.css';
 
 export enum Theme {
   Dark = 'dark',
@@ -17,7 +19,7 @@ export enum Theme {
 type ThemeProviderProps = {
   children?: ReactNode;
   defaultTheme?: Theme;
-  storageKey?: string;
+  key?: string;
 };
 
 type ThemeProviderState = {
@@ -32,18 +34,25 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
-export function ThemeProvider({
+const useTheme = () => useContext(ThemeProviderContext);
+
+function ThemeProvider({
   children,
   defaultTheme = Theme.System,
-  storageKey = 'mileiq-ui-theme',
+  key = 'ui-theme',
   ...props
-}: ThemeProviderProps) {
-  const [theme, setTheme] = useState(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+}: Readonly<ThemeProviderProps>) {
+  const storage = autoStorage({});
+  const [theme, setTheme] = useState<Theme>(() => {
+    const currentTheme = storage.getItem(key);
+    if (currentTheme && Object.values(Theme).includes(currentTheme as Theme)) {
+      return currentTheme as Theme;
+    }
+    return defaultTheme;
+  });
 
   useEffect(() => {
-    const root = window.document.documentElement;
+    const root = window?.document.documentElement;
 
     root.classList.remove(Theme.Light, Theme.Dark);
 
@@ -61,21 +70,22 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
-  useEffect(() => {
-    if (theme === defaultTheme) return;
+  // useEffect(() => {
+  //   if (theme === defaultTheme) return;
+  //   setTheme(defaultTheme);
+  // }, [defaultTheme, theme]);
 
-    setTheme(defaultTheme);
-  }, [defaultTheme, theme]);
+  useEffect(() => {
+    console.info('Theme defined to', theme);
+    storage.setItem(key, theme);
+  }, [theme]);
 
   const value = useMemo(
     () => ({
       theme,
-      setTheme: (newTheme: Theme) => {
-        localStorage.setItem(storageKey, newTheme);
-        setTheme(newTheme);
-      },
+      setTheme,
     }),
-    [theme, storageKey]
+    [theme, key],
   );
 
   return (
@@ -85,4 +95,4 @@ export function ThemeProvider({
   );
 }
 
-export const useTheme = () => {};
+export { ThemeProvider, useTheme };
