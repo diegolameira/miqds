@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@mileiq'
+          scope: '@diegolameira'
       - run: yarn install
       - run: yarn build
       - run: npm publish
