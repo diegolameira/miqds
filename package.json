@@ -16,6 +16,10 @@
       "import": "./dist/design-system.es.js",
       "require": "./dist/design-system.umd.js",
       "types": "./dist/index.d.ts"
+    },
+    "./dist/*.css": {
+      "import": "./dist/*.css",
+      "require": "./dist/*.css"
     }
   },
   "files": [
