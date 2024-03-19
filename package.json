@@ -2,7 +2,7 @@
   "name": "@diegolameira/design-system",
   "license": "MIT",
   "author": "Diego Lameira <diego@mileiq.com>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "dist/design-system.umd.js",
   "module": "dist/design-system.es.js",
