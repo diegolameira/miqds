@@ -2,7 +2,7 @@
   "name": "@diegolameira/design-system",
   "license": "MIT",
   "author": "Diego Lameira <diego@mileiq.com>",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "dist/design-system.umd.js",
   "module": "dist/design-system.es.js",
@@ -17,17 +17,18 @@
       "require": "./dist/design-system.umd.js",
       "types": "./dist/index.d.ts"
     },
-    "/design-system.css": {
-      "import": "./dist/design-system.css",
-      "require": "./dist/design-system.css"
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     },
-    "/fonts.css": {
+    "./fonts.css": {
       "import": "./dist/webfontkit/index.css",
       "require": "./dist/webfontkit/index.css"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "public"
   ],
   "sideEffects": false,
   "publishConfig": {
