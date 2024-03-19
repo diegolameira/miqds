@@ -22,9 +22,6 @@
       "require": "./dist/*.css"
     }
   },
-  "files": [
-    "dist"
-  ],
   "sideEffects": false,
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
